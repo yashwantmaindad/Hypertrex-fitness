@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-bg: #080808;
+  --color-secondary-bg: #111111;
+  --color-accent-gold: #D4AF37;
+  
+  --color-glass-card: rgba(255, 255, 255, 0.04);
+  --color-glass-card-hover: rgba(255, 255, 255, 0.08);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-glass-border-hover: rgba(255, 255, 255, 0.15);
+  
+  --font-sans: var(--font-outfit), sans-serif;
+  --font-display: var(--font-playfair), serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html, body {
+  background-color: #080808;
+  color: #ffffff;
+  scroll-behavior: auto; /* Handled by Lenis */
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+}
+
+/* Custom Scrollbar for Premium Feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080808;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D4AF37;
+}
+
+/* Glassmorphism utility classes */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-panel-hover {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 
+              0 0 50px -10px rgba(212, 175, 55, 0.05);
+}
+
+/* Smooth input styling */
+.premium-input {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.premium-input:focus {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: #D4AF37;
+  outline: none;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+select.premium-input {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+}
+
+select.premium-input option {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+/* Text masking for gold gradients */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #FFF 30%, #D4AF37 70%, #AA7C11 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA7C11 100%);
+}
+
+/* Lenis Custom Core Styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overflow: clip;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
