@@ -72,6 +72,8 @@ export default function ApplicationWizard({ selectedService, onClearSelectedServ
   const [currentStep, setCurrentStep] = useState(1);
   const [isClient, setIsClient] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const {
     register,
@@ -186,99 +188,44 @@ export default function ApplicationWizard({ selectedService, onClearSelectedServ
     }
   };
 
-  const onSubmit = (data: FormData) => {
-    // Format timestamp
-    const now = new Date();
-    const formattedDate = now.toLocaleString("en-US", {
-      dateStyle: "medium",
-      timeStyle: "short",
-    });
+  const onSubmit = async (data: FormData) => {
+    setIsSubmitting(true);
+    setErrorMessage("");
 
-    const leadHeader = selectedService 
-      ? `🔥 Service Inquiry: ${selectedService}` 
-      : `🔥 New Fitness Coaching Lead`;
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type: "application",
+          data: data,
+        }),
+      });
 
-    // Generate specific text layout
-    const rawMessage = `${leadHeader}
+      const result = await response.json();
 
-━━━━━━━━━━━━━━━━━━━━━━
-👤 PERSONAL DETAILS
-━━━━━━━━━━━━━━━━━━━━━━
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to submit application.");
+      }
 
-📛 Name: ${data.name}
-📧 Email: ${data.email}
-📞 Phone: ${data.phone}
-💬 WhatsApp: ${data.whatsapp}
-📸 Instagram: ${data.instagram}
-🎂 Age: ${data.age}
-⚧ Gender: ${data.gender}
-⚖ Weight: ${data.weight}
-📏 Height: ${data.height}
-📍 Location: ${data.location}
+      // Clear local storage and reset form
+      localStorage.removeItem("hypertrex_coaching_app");
+      reset();
 
-━━━━━━━━━━━━━━━━━━━━━━
-🎯 FITNESS GOAL
-━━━━━━━━━━━━━━━━━━━━━━
+      if (onClearSelectedService) {
+        onClearSelectedService();
+      }
 
-Goal: ${data.goal}
-
-━━━━━━━━━━━━━━━━━━━━━━
-📋 BACKGROUND
-━━━━━━━━━━━━━━━━━━━━━━
-
-🏋 Experience: ${data.experience}
-💼 Profession: ${data.profession}
-🚶 Activity Level: ${data.activityLevel}
-⏱ Workout Time: ${data.workoutTime}
-🥗 Diet: ${data.diet}
-😴 Sleep: ${data.sleep}
-🏥 Medical: ${data.medical}
-💊 Medications: ${data.medications}
-
-━━━━━━━━━━━━━━━━━━━━━━
-💪 CHALLENGES
-━━━━━━━━━━━━━━━━━━━━━━
-
-😤 Biggest Struggle: ${data.struggle}
-❌ Why Failed Before: ${data.failedBefore}
-🔥 Motivation: ${data.motivation}
-✅ Expected Outcome: ${data.expectedOutcome}
-
-━━━━━━━━━━━━━━━━━━━━━━
-🔍 DISCOVERY
-━━━━━━━━━━━━━━━━━━━━━━
-
-Source: ${data.source}
-Referral: ${data.referral}
-
-━━━━━━━━━━━━━━━━━━━━━━
-📅 COMMITMENT
-━━━━━━━━━━━━━━━━━━━━━━
-
-Duration: ${data.duration}
-Budget: ${data.budget}
-Start: ${data.start}
-
-━━━━━━━━━━━━━━━━━━━━━━
-🕐 Submitted: ${formattedDate}
-━━━━━━━━━━━━━━━━━━━━━━`;
-
-    const encodedMessage = encodeURIComponent(rawMessage);
-    const whatsappUrl = `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodedMessage}`;
-    
-    // Open WhatsApp in a new tab
-    window.open(whatsappUrl, "_blank");
-
-    // Clear local storage and reset form
-    localStorage.removeItem("hypertrex_coaching_app");
-    reset();
-
-    if (onClearSelectedService) {
-      onClearSelectedService();
+      // Trigger success confirmation modal
+      setShowSuccessModal(true);
+    } catch (err: any) {
+      console.error(err);
+      setErrorMessage(err.message || "Failed to submit application. Please check your connection or contact settings.");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    // Trigger success confirmation modal
-    setShowSuccessModal(true);
   };
 
   // Prevent hydration issues by not mounting layout logic until client is active
@@ -744,13 +691,29 @@ Start: ${data.start}
               ) : (
                 <button
                   type="submit"
-                  className="flex items-center gap-2 px-6 py-3.5 rounded-lg bg-accent-gold text-black hover:bg-white text-xs font-extrabold tracking-widest transition-all duration-300"
+                  disabled={isSubmitting}
+                  className="flex items-center gap-2 px-6 py-3.5 rounded-lg bg-accent-gold text-black hover:bg-white text-xs font-extrabold tracking-widest transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  SUBMIT APPLICATION
-                  <Check size={14} />
+                  {isSubmitting ? (
+                    <>
+                      SUBMITTING...
+                      <div className="h-3 w-3 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                    </>
+                  ) : (
+                    <>
+                      SUBMIT APPLICATION
+                      <Check size={14} />
+                    </>
+                  )}
                 </button>
               )}
             </div>
+
+            {errorMessage && (
+              <div className="text-red-500 text-xs mt-4 text-center">
+                {errorMessage}
+              </div>
+            )}
           </form>
 
         </div>

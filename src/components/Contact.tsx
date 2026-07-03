@@ -14,27 +14,32 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage("");
 
-    const messageText = `🔥 New Diagnostic Inquiry from Hypertrex Fitness:
-👤 Name: ${formData.firstName} ${formData.lastName}
-📧 Email: ${formData.email}
-📞 Phone: ${formData.phone || "Not provided"}
-💬 Message: ${formData.message}`;
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type: "inquiry",
+          data: formData,
+        }),
+      });
 
-    const encodedMessage = encodeURIComponent(messageText);
-    const whatsappUrl = `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodedMessage}`;
+      const result = await response.json();
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to send email.");
+      }
+
       setIsSuccess(true);
-      
-      // Open WhatsApp in a new tab
-      window.open(whatsappUrl, "_blank");
-
       setFormData({
         firstName: "",
         lastName: "",
@@ -45,7 +50,12 @@ export default function Contact() {
 
       // Clear success notification after 5s
       setTimeout(() => setIsSuccess(false), 5000);
-    }, 1000);
+    } catch (err: any) {
+      console.error(err);
+      setErrorMessage(err.message || "Failed to send message. Please verify configuration.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -240,6 +250,12 @@ export default function Contact() {
                   )}
                 </button>
               </div>
+
+              {errorMessage && (
+                <div className="text-red-500 text-xs mt-2 text-right">
+                  {errorMessage}
+                </div>
+              )}
             </form>
 
           </div>
