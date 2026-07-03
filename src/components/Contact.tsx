@@ -19,10 +19,22 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate elite submission behavior
+    const messageText = `🔥 New Diagnostic Inquiry from Hypertrex Fitness:
+👤 Name: ${formData.firstName} ${formData.lastName}
+📧 Email: ${formData.email}
+📞 Phone: ${formData.phone || "Not provided"}
+💬 Message: ${formData.message}`;
+
+    const encodedMessage = encodeURIComponent(messageText);
+    const whatsappUrl = `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodedMessage}`;
+
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSuccess(true);
+      
+      // Open WhatsApp in a new tab
+      window.open(whatsappUrl, "_blank");
+
       setFormData({
         firstName: "",
         lastName: "",
@@ -33,7 +45,7 @@ export default function Contact() {
 
       // Clear success notification after 5s
       setTimeout(() => setIsSuccess(false), 5000);
-    }, 1500);
+    }, 1000);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
