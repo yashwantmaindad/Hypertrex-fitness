@@ -85,10 +85,10 @@ export default function About() {
               {/* Image Box */}
               <div className="relative z-10 aspect-[3/4] w-full rounded-2xl overflow-hidden bg-primary-bg border border-glass-border">
                 <Image
-                  src="/assets/coach.png"
+                  src="/assets/coach.jpg"
                   alt="Coach Portrait"
                   fill
-                  className="object-cover object-center grayscale hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+                  className="object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
                   sizes="(max-width: 768px) 100vw, 380px"
                   priority
                 />

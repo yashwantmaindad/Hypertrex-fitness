@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/assets/coach.png",
+        url: "/assets/coach.jpg",
         width: 800,
         height: 1000,
         alt: "Hypertrex Fitness Coaching Protocol",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: ["/assets/coach.png"],
+    images: ["/assets/coach.jpg"],
     creator: "@y.xsh_m",
   },
   robots: {
@@ -59,7 +59,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "HealthClub",
     "name": "Hypertrex Fitness Elite Coaching",
-    "image": `${siteConfig.url}/assets/coach.png`,
+    "image": `${siteConfig.url}/assets/coach.jpg`,
     "@id": `${siteConfig.url}/#localbusiness`,
     "url": siteConfig.url,
     "telephone": siteConfig.contact.phone,
