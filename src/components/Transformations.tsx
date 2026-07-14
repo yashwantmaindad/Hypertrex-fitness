@@ -119,10 +119,10 @@ export default function Transformations() {
                 }}
                 onMouseDown={(e) => e.stopPropagation()}
                 onTouchStart={(e) => e.stopPropagation()}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-[#080808]/75 border border-white/10 text-white hover:bg-accent-gold hover:text-black hover:scale-105 transition-all duration-300 backdrop-blur-sm cursor-pointer shadow-lg"
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-[#080808]/85 border border-accent-gold/40 text-accent-gold hover:bg-accent-gold hover:text-black hover:scale-110 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300 backdrop-blur-md cursor-pointer shadow-[0_0_15px_rgba(0,0,0,0.5)] flex items-center justify-center"
                 aria-label="Previous client"
               >
-                <ChevronLeft size={20} />
+                <ChevronLeft size={24} />
               </button>
 
               <button 
@@ -132,10 +132,10 @@ export default function Transformations() {
                 }}
                 onMouseDown={(e) => e.stopPropagation()}
                 onTouchStart={(e) => e.stopPropagation()}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-[#080808]/75 border border-white/10 text-white hover:bg-accent-gold hover:text-black hover:scale-105 transition-all duration-300 backdrop-blur-sm cursor-pointer shadow-lg"
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-[#080808]/85 border border-accent-gold/40 text-accent-gold hover:bg-accent-gold hover:text-black hover:scale-110 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300 backdrop-blur-md cursor-pointer shadow-[0_0_15px_rgba(0,0,0,0.5)] flex items-center justify-center"
                 aria-label="Next client"
               >
-                <ChevronRight size={20} />
+                <ChevronRight size={24} />
               </button>
 
               {/* AFTER Image (Background Base) */}
@@ -200,8 +200,8 @@ export default function Transformations() {
                 style={{ left: `${sliderPosition}%` }}
               >
                 {/* Gold Circle Drag handle */}
-                <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-accent-gold border-2 border-black flex items-center justify-center text-black shadow-lg">
-                  <ArrowLeftRight size={16} />
+                <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-11 h-11 rounded-full bg-[#080808]/90 border-2 border-accent-gold flex items-center justify-center text-accent-gold shadow-[0_0_20px_rgba(212,175,55,0.35)]">
+                  <ArrowLeftRight size={18} />
                 </div>
               </div>
             </div>
