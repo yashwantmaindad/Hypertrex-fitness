@@ -93,7 +93,7 @@ export default function Transformations() {
                 style={{ clipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)` }}
               >
                 <Image 
-                  src="/assets/trans_before.png" 
+                  src="/assets/trans_before.jpg" 
                   alt="Before Transformation" 
                   fill 
                   className="object-cover object-center pointer-events-none scale-100"
