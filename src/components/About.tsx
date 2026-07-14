@@ -148,14 +148,14 @@ export default function About() {
             <div ref={ref} className="grid grid-cols-1 sm:grid-cols-3 gap-6 p-6 rounded-2xl bg-white/[0.02] border border-glass-border">
               <div className="flex flex-col items-center text-center">
                 <span className="text-3xl md:text-4xl font-extrabold text-accent-gold">
-                  <Counter value={500} suffix="+" />
+                  <Counter value={13} suffix="+" />
                 </span>
                 <span className="text-[10px] tracking-widest text-gray-500 uppercase mt-2">Clients Coached</span>
               </div>
               
               <div className="flex flex-col items-center text-center">
                 <span className="text-3xl md:text-4xl font-extrabold text-accent-gold">
-                  <Counter value={15} suffix="+" />
+                  <Counter value={4} suffix="+" />
                 </span>
                 <span className="text-[10px] tracking-widest text-gray-500 uppercase mt-2">Years Experience</span>
               </div>
