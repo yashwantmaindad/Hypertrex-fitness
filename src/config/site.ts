@@ -12,7 +12,7 @@ export const siteConfig = {
     googleMaps: "",
   },
   socials: {
-    instagram: "https://www.instagram.com/y.xsh_m?igsh=MXZyNmJ1b3NnenptYQ==",
+    instagram: "https://www.instagram.com/yashwan7_m?igsh=MXZyNmJ1b3NnenptYQ==",
     facebook: "", 
     youtube: "",
     linkedin: "",

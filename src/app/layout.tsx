@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     images: ["/assets/coach.jpg"],
-    creator: "@y.xsh_m",
+    creator: "@yashwan7_m",
   },
   robots: {
     index: true,
