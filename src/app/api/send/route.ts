@@ -15,8 +15,8 @@ export async function POST(request: Request) {
       );
     }
 
-    // Determine recipient email (fallback to config if not set in env)
-    const recipientEmail = process.env.NOTIFICATION_EMAIL || siteConfig.contact.email;
+    // Determine recipient email (fallback to verified Resend email if not set in env)
+    const recipientEmail = process.env.NOTIFICATION_EMAIL || "yashwantmaindad@gmail.com";
 
     if (!recipientEmail) {
       console.error("Recipient email is not configured.");
