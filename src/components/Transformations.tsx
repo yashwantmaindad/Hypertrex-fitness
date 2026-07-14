@@ -7,13 +7,13 @@ import { Scale, ArrowLeftRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 const CLIENTS = [
   {
-    name: "Alexander P.",
+    name: "Mohan P.",
     role: "Founder & Tech CEO",
     protocol: "Executive Protocol",
-    duration: "16 Weeks",
-    weightChange: "15.3 kg",
-    muscleChange: "+2.8 kg",
-    testimonial: "The structure Marcus built fits perfectly into my insane business travel schedule. I lost 15kg of fat, gained significant strength across all lifts, and my cognitive focus has never been this consistent. It is a game changer for high-stress executives.",
+    duration: "11 Weeks",
+    weightChange: "10 kg",
+    muscleChange: "+3.4 kg",
+    testimonial: "The structure Marcus built fits perfectly into my insane business travel schedule. I lost 10kg of fat, gained significant strength across all lifts, and my cognitive focus has never been this consistent. It is a game changer for high-stress executives.",
     beforeImage: "/assets/trans_before.jpg",
     afterImage: "/assets/trans_after.png"
   },
